@@ -86,17 +86,27 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: Container(
         width: MediaQuery.of(context).size.width / 3.5,
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 10.0),
         child: Column(
           children: [
             Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14.0,
+              ),
             ),
-            const SizedBox(height: 8.0),
-            Text(content),
+            const SizedBox(height: 6.0),
+            Text(
+              content,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 13.0),
+            ),
           ],
         ),
       ),
