@@ -11,11 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MyPortfolio',
+      title: 'Balqis Portfolio',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.indigo,
-          secondary: Colors.amber[700],
+          secondary: Colors.teal,
         ),
         useMaterial3: true,
       ),
