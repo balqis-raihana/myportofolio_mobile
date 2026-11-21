@@ -15,6 +15,7 @@ void main() {
     expect(find.text('Lihat Experience'), findsOneWidget);
     expect(find.text('Lihat Coursework'), findsOneWidget);
     expect(find.text('Tambah Item'), findsOneWidget);
+    expect(find.text('Tambah Edukasi'), findsOneWidget);
     expect(find.text('Logout'), findsOneWidget);
   });
 }
