@@ -10,9 +10,21 @@ class MyHomePage extends StatelessWidget {
   final String kelas = "PBP A";
 
   final List<ItemHomepage> items = [
-    ItemHomepage("Lihat Experience", Icons.work_outline, Colors.indigo.shade600),
-    ItemHomepage("Lihat Coursework", Icons.school_outlined, Colors.teal.shade600),
-    ItemHomepage("Tambah Item", Icons.add_circle_outline, Colors.amber.shade800),
+    ItemHomepage(
+      "Lihat Experience",
+      Icons.work_outline,
+      Colors.indigo.shade600,
+    ),
+    ItemHomepage(
+      "Lihat Coursework",
+      Icons.school_outlined,
+      Colors.teal.shade600,
+    ),
+    ItemHomepage(
+      "Tambah Item",
+      Icons.add_circle_outline,
+      Colors.amber.shade800,
+    ),
     ItemHomepage("Tambah Edukasi", Icons.school, Colors.green.shade700),
     ItemHomepage("Logout", Icons.logout, Colors.red.shade700),
   ];
@@ -23,10 +35,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'MyPortfolio',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -93,9 +102,7 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Container(
         width: MediaQuery.of(context).size.width / 3.5,
         padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 10.0),

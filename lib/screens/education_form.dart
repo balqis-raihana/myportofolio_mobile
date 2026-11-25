@@ -56,8 +56,7 @@ class _EducationFormPageState extends State<EducationFormPage> {
                     : '$yearStart – $yearEnd',
               ),
               if (gpa.isNotEmpty) _summaryRow('IPK', gpa),
-              if (description.isNotEmpty)
-                _summaryRow('Deskripsi', description),
+              if (description.isNotEmpty) _summaryRow('Deskripsi', description),
             ],
           ),
         ),
@@ -127,10 +126,7 @@ class _EducationFormPageState extends State<EducationFormPage> {
       appBar: AppBar(
         title: const Text(
           'Tambah Edukasi',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -247,11 +243,14 @@ class _EducationFormPageState extends State<EducationFormPage> {
                           return null; // opsional
                         }
                         final yearEnd = int.tryParse(value.trim());
-                        if (yearEnd == null || yearEnd < 1900 || yearEnd > 2100) {
+                        if (yearEnd == null ||
+                            yearEnd < 1900 ||
+                            yearEnd > 2100) {
                           return 'Tahun tidak valid.';
                         }
-                        final yearStart =
-                            int.tryParse(_yearStartController.text.trim());
+                        final yearStart = int.tryParse(
+                          _yearStartController.text.trim(),
+                        );
                         if (yearStart != null && yearEnd < yearStart) {
                           return 'Harus ≥ tahun masuk.';
                         }
@@ -272,8 +271,9 @@ class _EducationFormPageState extends State<EducationFormPage> {
                   prefixIcon: Icon(Icons.bar_chart_outlined),
                   border: OutlineInputBorder(),
                 ),
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) return null;
                   final gpa = double.tryParse(value.trim());
@@ -290,7 +290,8 @@ class _EducationFormPageState extends State<EducationFormPage> {
                 controller: _descriptionController,
                 decoration: const InputDecoration(
                   labelText: 'Deskripsi / Pencapaian',
-                  hintText: 'Deskripsikan pengalaman atau pencapaian (opsional)',
+                  hintText:
+                      'Deskripsikan pengalaman atau pencapaian (opsional)',
                   prefixIcon: Icon(Icons.notes_outlined),
                   border: OutlineInputBorder(),
                   alignLabelWithHint: true,
