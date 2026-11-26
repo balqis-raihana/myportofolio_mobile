@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:myportofolio_mobile/config.dart';
+import 'package:myportofolio_mobile/models/coursework.dart';
 import 'package:myportofolio_mobile/models/project.dart';
 
 /// Exception thrown when an API request returns a non-2xx status code.
@@ -23,6 +24,10 @@ class ApiClient {
   final String baseUrl;
 
   Uri _uri(String path) => Uri.parse('$baseUrl$path');
+
+  // ===========================================================================
+  // Projects (Tutorial 10)
+  // ===========================================================================
 
   Future<List<Project>> getProjects() async {
     final response = await _client.get(
@@ -53,6 +58,71 @@ class ApiClient {
     final decoded = jsonDecode(response.body) as Map<String, dynamic>;
     return Project.fromJson(decoded);
   }
+
+  // ===========================================================================
+  // Coursework (Individual Assignment 9)
+  // ===========================================================================
+
+  Future<List<Coursework>> getCoursework({
+    String? search,
+    String? category,
+  }) async {
+    final queryParams = <String, String>{};
+    if (search != null && search.isNotEmpty) {
+      queryParams['search'] = search;
+    }
+    if (category != null && category.isNotEmpty) {
+      queryParams['category'] = category;
+    }
+
+    final uri = Uri.parse('$baseUrl/api/v1/coursework/')
+        .replace(queryParameters: queryParams.isNotEmpty ? queryParams : null);
+
+    final response = await _client.get(
+      uri,
+      headers: const {'Accept': 'application/json'},
+    );
+    _ensureSuccess(response);
+    final decoded = jsonDecode(response.body) as List<dynamic>;
+    return decoded
+        .map((item) => Coursework.fromJson(item as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<Coursework> createCoursework(
+    Coursework coursework, {
+    required String token,
+  }) async {
+    final response = await _client.post(
+      _uri('/api/v1/coursework/'),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Token $token',
+      },
+      body: jsonEncode(coursework.toJson()),
+    );
+    _ensureSuccess(response);
+    final decoded = jsonDecode(response.body) as Map<String, dynamic>;
+    return Coursework.fromJson(decoded);
+  }
+
+  Future<Coursework> toggleCourseworkStar(
+    String courseworkId, {
+    required String token,
+  }) async {
+    final response = await _client.post(
+      _uri('/api/v1/coursework/$courseworkId/star/'),
+      headers: {'Accept': 'application/json', 'Authorization': 'Token $token'},
+    );
+    _ensureSuccess(response);
+    final decoded = jsonDecode(response.body) as Map<String, dynamic>;
+    return Coursework.fromJson(decoded);
+  }
+
+  // ===========================================================================
+  // Authentication (Tutorial 10)
+  // ===========================================================================
 
   Future<String> obtainToken(String username, String password) async {
     final response = await _client.post(
